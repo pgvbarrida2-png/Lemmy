@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Lemuel!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 600px;
+            margin: 30px auto;
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .signature {
+            margin-top: 20px;
+            font-style: italic;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .cake-container {
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .cake {
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cake:hover {
+            transform: scale(1.05);
+        }
+
+        .layer {
+            width: 180px;
+            height: 60px;
+            margin: 0 auto;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .layer1 {
+            background: #ff6b9d;
+            margin-top: 100px;
+        }
+
+        .layer2 {
+            background: #ffa8c5;
+            width: 160px;
+            margin-top: -5px;
+        }
+
+        .layer3 {
+            background: #ffc8dd;
+            width: 140px;
+            margin-top: -5px;
+        }
+
+        .candle {
+            width: 8px;
+            height: 40px;
+            background: #fff59d;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .flame {
+            width: 12px;
+            height: 18px;
+            background: #ffa726;
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.3s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scaleY(1); }
+            100% { transform: translateX(-50%) scaleY(1.1); }
+        }
+
+        .button {
+            background: #fff;
+            color: #667eea;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Happy Birthday Lemuel Iesley Talha! 🎉</h1>
+        
+        <div class="cake-container">
+            <div class="cake" id="cake" onclick="blowCandle()">
+                <div class="layer layer1">
+                    <div class="candle">
+                        <div class="flame" id="flame"></div>
+                    </div>
+                </div>
+                <div class="layer layer2"></div>
+                <div class="layer layer3"></div>
+            </div>
+            <p style="color: white; margin-top: 20px; font-size: 1.1em;">Click the cake to blow out the candle! 🎂</p>
+        </div>
+
+        <div class="message">
+            <p>Happy birthday naka babyyy lemlem ko! Thank you for being the light in this world. Continue emitting peace and love, mu dear! Palangga ta guid ka. I'm proud of you!</p>
+            <p class="signature">Love, Pearl ❤️</p>
+        </div>
+
+        <div>
+            <button class="button" onclick="playSong()">🎵 Play Birthday Song</button>
+            <button class="button" onclick="launchFireworks()">🎆 Launch Fireworks</button>
+        </div>
+    </div>
+
+    <audio id="birthday-song" loop>
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAADhAC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAA4Txl8u3AAAAAAD/+xDEAAPAAAGkAAAAIAAANIAAAARMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let songPlaying = false;
+        let candleLit = true;
+
+        function playSong() {
+            const audio = document.getElementById('birthday-song');
+            if (!songPlaying) {
+                // Create a simple birthday tune using Web Audio API
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                playBirthdaySong(audioContext);
+                songPlaying = true;
+            }
+        }
+
+        function playBirthdaySong(ctx) {
+            const notes = [
+                {freq: 264, duration: 0.5}, // C
+                {freq: 264, duration: 0.5}, // C
+                {freq: 297, duration: 1},   // D
+                {freq: 264, duration: 1},   // C
+                {freq: 352, duration: 1},   // F
+                {freq: 330, duration: 2},   // E
+                {freq: 264, duration: 0.5}, // C
+                {freq: 264, duration: 0.5}, // C
+                {freq: 297, duration: 1},   // D
+                {freq: 264, duration: 1},   // C
+                {freq: 396, duration: 1},   // G
+                {freq: 352, duration: 2},   // F
+            ];
+
+            let time = ctx.currentTime;
+            notes.forEach(note => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.frequency.value = note.freq;
+                osc.type = 'sine';
+                
+                gain.gain.setValueAtTime(0.3, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + note.duration);
+                
+                osc.start(time);
+                osc.stop(time + note.duration);
+                
+                time += note.duration;
+            });
+
+            setTimeout(() => {
+                songPlaying = false;
+            }, time * 1000);
+        }
+
+        function blowCandle() {
+            const flame = document.getElementById('flame');
+            if (candleLit) {
+                flame.style.display = 'none';
+                candleLit = false;
+                launchFireworks();
+                setTimeout(() => {
+                    flame.style.display = 'block';
+                    candleLit = true;
+                }, 5000);
+            }
+        }
+
+        function launchFireworks() {
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    createFirework();
+                }, i * 400);
+            }
+        }
+
+        function createFirework() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500'];
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * (window.innerHeight * 0.6);
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 100 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                particle.style.animation = 'explode 1s ease-out forwards';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }
+        }
+
+        // Auto-play birthday song after 1 second
+        setTimeout(() => {
+            playSong();
+        }, 1000);
+    </script>
+</body>
+</html>
